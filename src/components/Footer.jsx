@@ -12,7 +12,7 @@ function Footer() {
             Media Player
           </Link>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur nobis doloribus rem praesentium rerum laborum velit eaque adipisci, maiores ipsam, dolorem quibusdam, deleniti magnam sint illum esse qui perspiciatis dolore!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur nobis doloribus rem praesentium rerum laborum velit eaque adipisci, maiores ipsam
           </p>
         </div>
         <div className="col-4">

@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { addToCategory, deleteCategory, getALLCategory, getaVideo, updateCategory } from '../services/allAPI';
 import { ToastContainer, toast } from 'react-toastify';
 import { Row , Col} from 'react-bootstrap';
-import Videocard from './Videocard';
+import Categorycard from './Categorycard';
 
 function Category() {
   const [show, setShow] = useState(false);
@@ -14,6 +14,7 @@ function Category() {
 
   const [category,setCategory] = useState({})
   const [allCateogry,setAllCategory]= useState([])
+  const[uploadCategoryStatus,setUploadCategoryStatus] = useState({})
 
   //function to add category
   const handleAddCategory = async()=>{
@@ -28,6 +29,8 @@ function Category() {
       console.log(response);
       if(response.status>=200 && response.status<300){
         toast.success('Category Successfully Added')
+
+        setUploadCategoryStatus(response)
         //to make state null 
         setCategory('')
         //to close the modal
@@ -83,7 +86,7 @@ function Category() {
 
   useEffect(()=>{
     getAllCategory()
-  },[])
+  },[uploadCategoryStatus])
   return (
    
       <>
@@ -91,11 +94,12 @@ function Category() {
             <button onClick={handleShow} style={{width:'300px'}} className='btn btn-warning'> Add New Category</button>
         </div>
 
+
         {
           allCateogry?.length>0?
           allCateogry?.map((item)=>(
             <div className='mt-4 border border-secondary rounded p-3'>
-              <div className='d-flex justify-content-between align-items-center' droppable onDragOver={(e)=>dragover(e)} onDrop={(e)=>videoDrop(e,item?.id)}>
+              <div className='d-flex justify-content-between align-items-center mb-2' droppable onDragOver={(e)=>dragover(e)} onDrop={(e)=>videoDrop(e,item?.id)}>
                 <h6>{item.category}</h6>
                 <button onClick={()=>removeCategory(item?.id)} className='btn btn-danger' style={{border:'none'}}><i class="fa-solid fa-trash-can"></i></button>
               </div>
@@ -103,7 +107,7 @@ function Category() {
                 <Col>
                 {
                   item.allVideos?.length>0?
-                  item.allVideos.map(card=>(<Videocard display={card}/>)):<p>Nothing added yet</p>
+                  item.allVideos.map(card=>(<Categorycard display={card}/>)):<p>Nothing added yet</p>
                 }
                 </Col>
               </Row>
